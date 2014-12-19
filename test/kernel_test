@@ -1,3 +1,29 @@
 #!/bin/bash
 
+cp badkernel.img badkernel.img2
+res=$(../src/shush-kernel badkernel.img)
+mv badkernel.img2 badkernel.img
+
+if [ "$res" == "0" ]; then
+	echo "shush-kernel succeeded on a bad kernel image!"
+	exit 1
+fi
+
+cp goodkernel.img goodkernel.img2
+res=$(../src/shush-kernel goodkernel.img)
+
+if ! [ "$res" == "0"]; then
+	echo "shush-kernel failed on a good kernel image!"
+	mv goodkernel.img2 goodkernel.img
+	exit 1
+fi
+
+res=$(diff goodkernel.img goodkernel.result)
+mv goodkernel.img2 goodkernel.img
+
+if ! [ "$res" == "0"]; then
+	echo "shush-kernel failed to create the desired kernel image!"
+	exit 1
+fi
+
 echo "shush-kernel tests succeeded!"
