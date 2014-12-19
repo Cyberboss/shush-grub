@@ -30,7 +30,7 @@ if [ "$#" == 1 ] && [ "$1" == "-d" ]; then
 	echo '
 Getting dev PKGBUILD
 '
-	curl -o $DIR/PKGBUILD https://raw.githubusercontent.com/cybnetsurfe3011/shush-grub/dev/pkg/PKGBUILD
+	curl -o $DIR/PKGBUILD https://raw.githubusercontent.com/cybnetsurfe3011/shush-grub/dev/pkg/PKGBUILDdev
 else
 	echo '
 Getting rel PKGBUILD'
