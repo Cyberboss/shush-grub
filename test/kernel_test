@@ -12,7 +12,7 @@ fi
 cp goodkernel.img goodkernel.img2
 res=$(../src/shush-kernel goodkernel.img)
 
-if ! [ "$res" == "0"]; then
+if ! [ "$res" == "0" ]; then
 	echo "shush-kernel failed on a good kernel image!"
 	mv goodkernel.img2 goodkernel.img
 	exit 1
