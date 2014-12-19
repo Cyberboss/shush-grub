@@ -92,7 +92,7 @@ int main(int argc, char** argv) {
     return 3;
   }
 
-  data = write(fd, buffer, sizeof(buffer));
+  data = write(fd, buffer, data);
   if (data < 0) {
     fprintf(stderr, "Could not write %s, good luck: %s\n", argv[1], strerror(errno));
     return 4;
