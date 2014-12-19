@@ -13,7 +13,7 @@ source=("git://github.com/cybnetsurfe3011/shush-grub#branch=dev")
 md5sums=('SKIP')
 pkgver() {
 	cd ../$pkgname
-	git describe | sed 's|\(-[0-9]\)-.*|\1|'|sed 's/-/./g'
+	git describe | sed 's|-.*||'
 }
 build() {
   cd $pkgname
