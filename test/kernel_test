@@ -27,7 +27,7 @@ res=$?
 mv goodkernel.img2 goodkernel.img
 
 
-if ! [ "$res" == "0"]; then
+if ! [ "$res" == "0" ]; then
 	echo "shush-kernel failed to create the desired kernel image!"
 	exit 1
 fi
