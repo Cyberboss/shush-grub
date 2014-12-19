@@ -1,0 +1,44 @@
+#!/bin/bash
+
+
+DIR=$(cd "$(dirname "$BASH_SOURCE[0]}" )" && pwd)
+
+if ! [ "$DIR" == "$(pwd)" ]; then
+	echo "Run this command from its location"
+	exit 0
+fi
+
+MYNAME=$(basename $0)
+
+cat $DIR/$MYNAME > /tmp/shush-grubpkgtestdlerstoragefile
+
+echo "Warning this script will call rm -rf * ! 
+We are currently in $DIR
+Please enter
+Iwanttokillpuppies
+to continue
+"
+read
+if ! [ "$REPLY" == "Iwanttokillpuppies" ]; then
+	echo "Aborted!"
+	exit 0
+fi
+
+rm -rf *
+
+if [ "$#" == 1 ] && [ "$1" == "-d" ]; then
+	echo '
+Getting dev PKGBUILD
+'
+	curl -o $DIR/PKGBUILD https://raw.githubusercontent.com/cybnetsurfe3011/shush-grub/dev/pkg/PKGBUILD
+else
+	echo '
+Getting rel PKGBUILD'
+	echo 'run with first option -d for dev
+'
+	curl -o $DIR/PKGBUILD https://raw.githubusercontent.com/cybnetsurfe3011/shush-grub/master/pkg/PKGBUILD
+fi
+
+cat /tmp/shush-grubpkgtestdlerstoragefile > $DIR/$MYNAME
+chmod +x $DIR/$MYNAME
+rm /tmp/shush-grubpkgtestdlerstoragefile
